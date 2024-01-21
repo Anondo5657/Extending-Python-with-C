@@ -96,3 +96,15 @@ jobs:
         # This step uses the identity token to provision an ephemeral certificate
         # against the sigstore community Fulcio instance.
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
+        TAGS: ${{ steps.meta.outputs.tags }}
+DIGEST: ${{ steps.build-and-push.outputs.digest }}
+
+# This step uses the identity token to provision an ephemeral certificate
+# against the sigstore community Fulcio instance.
+run: |
+  echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
+  # Add your next commands here
+  # For example:
+  echo "Continuing with the next steps..."
+  # Your additional commands go here
+  
